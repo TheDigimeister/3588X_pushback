@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/adi.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -78,8 +79,29 @@ void opcontrol() {
 	pros::MotorGroup left_mg({1, -2, 3});    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
 	pros::MotorGroup right_mg({-4, 5, -6});  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
 
+	pros::ADIAnalogIn target ('A');
+	pros::ADIAnalogIn P ( 'B');
+	pros::ADIAnalogIn I ( 'C');
+	pros::ADIAnalogIn D ( 'D');
+	
+
+
+
+	master.clear();
 
 	while (true) {
+		master.print(0, 0, "Target = %d", target.get_value());
+		pros::delay(50);
+
+		master.print(1, 0, "P = %d", P.get_value());
+		pros::delay(50);
+
+		master.print(2, 0, "I = %d", I.get_value());
+		pros::delay(50);
+
+		master.print(2, 10, "D = %d", D.get_value());
+		pros::delay(50);
+
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs

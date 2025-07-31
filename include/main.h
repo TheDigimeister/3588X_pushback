@@ -24,6 +24,7 @@
  * E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
  * not convenient for most student programmers.
  */
+#include "pros/adi.hpp"
 #define PROS_USE_SIMPLE_NAMES
 
 /**
